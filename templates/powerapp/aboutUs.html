@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<!--    about sections-->
+
+<!--    who we are section-->
+    {% for about in fullAbout %}
+       {% if about.who_we_are and about.Use_New_Who_We_Are %}
+        <section class="ftco-section card bg-transparent  ftco-no-pb" id="about-who-we-are">
+       <div class="container">
+        <div class="row justify-content-center pb-5">
+           <div class="col-md-10 heading-section text-center ftco-animate">
+                <h1 class="big big-2 txt-dark">About us</h1>
+                <h2 class="mb-4 text-dark">Who we are</h2>
+           </div>
+            <div class="row">
+    			<div class="col-md-12">
+    				<div class="mt-5 ftco-animate text-dark">
+
+                            {{ about.who_we_are|safe }}
+                    </div>
+                </div>
+            </div>
+            <div>
+            </div>
+        </div>
+       </div>
+    </section>
+       {% endif %}
+    {% endfor %}
+
+<!--    what we do section-->
+    {% for about in fullAbout %}
+       {% if about.what_we_do and about.Use_New_What_We_Do %}
+<section class="ftco-section card bg-transparent  ftco-no-pb" id="about-what-we-do">
+       <div class="container">
+        <div class="row justify-content-center pb-5">
+           <div class="col-md-10 heading-section text-center ftco-animate">
+                <!-- <h1 class="big big-2 text-dark">About us</h1> -->
+                <h2 class="mb-4 text-dark">What we do</h2>
+           </div>
+            <div class="row">
+    			<div class="col-md-12">
+    				<div class="mt-5 ftco-animate text-dark">
+
+                            {{ about.what_we_do|safe }}
+                    </div>
+                </div>
+            </div>
+            <div>
+            </div>
+        </div>
+       </div>
+    </section>
+       {% endif %}
+    {% endfor %}
+
+
+<!--    vision and goals-->
+{% for about in fullAbout %}
+     {% if about.vision and about.Use_New_Vision or about.goals and about.Use_New_Goals %}
+        {% if about.vision and about.Use_New_Vision and about.goals and about.Use_New_Goals %}
+            <section class="ftco-section card bg-transparent  ftco-no-pb" id="about-us-vision-and-goals">
+               <div class="container">
+                <div class="row justify-content-center pb-5">
+                   <div class="col-md-10 heading-section text-center ftco-animate">
+                        <!-- <h1 class="big big-2  text-dark">About us</h1> -->
+                        <h2 class="mb-4 text-dark">Our Vision and Goals</h2>
+                   </div>
+                <div class="row">
+    			<div class="col-md-6">
+                    <h5 class="text-center text-dark">Vision</h5>
+    				<div class="mt-5 ftco-animate text-dark">
+
+                            {{ about.vision|safe }}
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <h5 class="text-center text-dark">Goals</h5>
+                <div class="mt-5 ftco-animate text-dark">
+
+                            {{ about.goals|safe }}
+                    </div>
+                </div>
+            </div>
+                </div>
+               </div>
+            </section>
+{% elif about.vision and about.Use_New_Vision %}
+<section class="ftco-section card bg-transparent  ftco-no-pb" id="about-us-vision-and-goals">
+               <div class="container">
+                <div class="row justify-content-center pb-5">
+                   <div class="col-md-10 heading-section text-center ftco-animate">
+                        <!-- <h1 class="big big-2" text-dark>About us</h1> -->
+                        <h2 class="mb-4 text-dark">Our Vision</h2>
+                   </div>
+                <div class="row">
+    			<div class="col-md-12">
+    				<div class="mt-5 ftco-animate text-dark">
+
+                            {{ about.vision|safe }}
+                    </div>
+                </div>
+            </div>
+                </div>
+               </div>
+            </section>
+{% elif about.goals and about.Use_New_Goals %}
+<section class="ftco-section card bg-transparent  ftco-no-pb" id="about-us-vision-and-goals">
+               <div class="container">
+                <div class="row justify-content-center pb-5">
+                   <div class="col-md-10 heading-section text-center ftco-animate">
+                        <!-- <h1 class="big big-2 text-dark">About us</h1> -->
+                        <h2 class="mb-4 text-dark">Our Goals</h2>
+                   </div>
+                <div class="row">
+    			<div class="col-md-12">
+    				<div class="mt-5 ftco-animate text-dark">
+
+                            {{ about.goals|safe }}
+                    </div>
+                </div>
+            </div>
+                </div>
+               </div>
+</section>
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
+<!--contact section-->
+<section class="ftco-section contact-section ftco-no-pb" id="contact-us">
+      <div class="container">
+      	<div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section text-center ftco-animate fadeInUp ftco-animated">
+            <!-- <h1 class="big big-2 text-dark text-dark-300">Contact</h1> -->
+            <h2 class="mb-4 text-dark">Contact us</h2>
+            <p>We have an open ear, feel free to reach out to us in any of these ways below..</p>
+          </div>
+        </div>
+
+        <div class="row d-flex justify-content-center contact-info mb-5">
+            {% for about in fullAbout %}
+            {% if about.Where_we_are and about.Use_New_Where_We_Are %}
+          <div class="col-md-6 col-lg-3 d-flex ftco-animate fadeInUp ftco-animated">
+          	<div class="align-self-stretch  box p-4 text-center">
+          		<div class="icon d-flex align-items-center bg-dark justify-content-center">
+          			<span class="icon-map-signs"></span>
+          		</div>
+          		<h3 class="mb-4 text-dark">Address</h3>
+	            <p>{{about.Where_we_are|safe}}</p>
+	          </div>
+          </div>
+            {% endif %}
+
+            {% if about.our_official_phone %}
+          <div class="col-md-6 col-lg-3 d-flex ftco-animate fadeInUp ">
+          	<div class="align-self-stretch box p-4 text-center">
+          		<div class="icon d-flex align-items-center bg-dark justify-content-center">
+          			<span class="icon-phone2"></span>
+          		</div>
+          		<h3 class="mb-4 text-dark">Contact Number</h3>
+	            <p><a href="tel://{{ about.our_official_phone }}" class="text-dark">{{about.our_official_phone|safe}}</a></p>
+	          </div>
+          </div>
+            {% endif %}
+
+            {% if about.our_official_email %}
+          <div class="col-md-6 col-lg-3 d-flex ftco-animate fadeInUp ">
+          	<div class="align-self-stretch box p-4 text-center">
+          		<div class="icon d-flex align-items-center bg-dark justify-content-center">
+          			<span class="icon-paper-plane"></span>
+          		</div>
+          		<h3 class="mb-4 text-dark">Email Address</h3>
+	            <p><a href="mailto:{{about.our_official_email}}" class="text-dark">{{about.our_official_email|safe}}</a></p>
+	          </div>
+          </div>
+            {% endif %}
+
+
+          <div class="col-md-6 col-lg-3 d-flex ftco-animate fadeInUp ">
+          	<div class="align-self-stretch box p-4 text-center">
+          		<div class="icon d-flex align-items-center bg-dark justify-content-center">
+          			<span class="icon-globe"></span>
+          		</div>
+          		<h3 class="mb-4 text-dark">Website</h3>
+	            <p><a href="#" class="text-dark">www.stoptortureuganda.com</a></p>
+	          </div>
+          </div>
+        </div>
+        {% endfor %}
+
+
+        <div class="row pb-lg-2 no-gutters block-9" id="contact-us-form">
+          <div class="col-md-6 order-md-last d-flex">
+            <form action="{% url 'powerapp:sendEmail' %}" class="bg-danger p-4 p-md-5 contact-form">
+              {% csrf_token %}
+                <div class="form-group">
+                <input type="text" name="name" required class="form-control" placeholder="Enter your name">
+              </div>
+              <div class="form-group">
+                <input type="email" name="email" required class="form-control" placeholder="Email Address">
+              </div>
+              <div class="form-group">
+                <textarea name="" id="" cols="30" required rows="7" class="form-control" placeholder="Message"></textarea>
+              </div>
+              <div class="form-group">
+                <input type="submit" value="Send Email now" class="btn btn-sm btn-success py-2 px-1">
+              </div>
+            </form>
+          </div>
+          
+
+           <div class="col-md-6 d-flex">
+          <div class="img" style="background-image: url({% static 'images/contact2.jpg' %});">
+          	</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+{% endblock content %}

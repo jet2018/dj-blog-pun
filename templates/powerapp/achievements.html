@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<section class="mt-lg-5 pt-lg-5">
+
+	<!-- top pagination -->
+		<nav aria-label="Page navigation pagination-sm  example">
+			 {% if is_paginated %}
+		  <ul class="pagination justify-content-end mr-1">
+			  {% if page_obj.has_previous %}
+		    <li class="page-item">
+		      <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+			  {% else %}
+			<li class="page-item disabled">
+		      <a class="page-link" href="#" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+			   {% endif %}
+				{% for i in paginator.page_range %}
+			  	{% if page_obj.number == i %}
+
+		    <li class="page-item">
+		    	<a class="page-link active bg-dark text-light" href="#">{{ i }}</a>
+			</li>
+			  {% else %}
+			<li class="page-item">
+			  <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+			</li>
+			   {% endif %}
+			  {% endfor %}
+			  {% if page_obj.has_next %}
+		    	<li class="page-item">
+			      <a class="page-link" href="?page={{page_obj.next_page_number}}" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+		    </li>
+		{% else %}
+			<li class="page-item disabled">
+				<a class="page-link">&raquo;</a>
+			</li>
+		{% endif %}
+		</ul>
+		{% endif %}
+		</nav>
+<!--pagination stoops here-->
+
+	<div class="row ml-lg-1">
+		
+		{% for victim in victims %}
+  	<div class=" bg-transparent col-lg-3 col-xl-4 col-md-4 col-sm-6 col-xs-12">
+  		<a href="{% url 'powerapp:single' victim.slug %}">
+		{% if victim.Image %}
+    	<img src="{{ victim.Image.url }}" style="max-height: 50%; max-width:100%;" class="card-img-top img-fluid" alt="{{ victim.title|truncatechars:20 }}"/>
+		{% elif victim.Video %}
+		<video src="{{ victim.Video.url }}" width="100%"  preload="auto"  class="card-img-top img-fluid" controls></video>
+		{% else %}
+		{% endif %}
+	</a>
+
+		<div class="card-body">
+			<a href="{% url 'powerapp:single' victim.slug %}">
+      <h5 class="card-title font-weight-bold text-dark">{{victim.title|capfirst|truncatechars:42}}</h5>
+      <span class="card-text text-dark">{{ victim.short_description|capfirst|truncatechars:100  }}</span>
+     <div class="card-text text-dark"><small class="text-muted text-dark">Uploaded {{ victim.upload_date|naturaltime }}: <span id="likesSpan{{victim.id}}">{{ victim.total_likes }} Like{{ victim.total_likes|pluralize }}</span></small>
+      </div>
+      </a>
+    </div>
+  </div>
+		{% empty %}
+		<center>
+		<h5 class="alert  bg-dark text-danger text-center">No images have been uploaded as of yet</h5>
+		</center>
+			{% endfor %}
+</div>
+<!-- bottom pagination -->
+		<nav aria-label="Page navigation pagination-sm  example">
+			 {% if is_paginated %}
+		  <ul class="pagination justify-content-end mr-1">
+			  {% if page_obj.has_previous %}
+		    <li class="page-item">
+		      <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+			  {% else %}
+			<li class="page-item disabled">
+		      <a class="page-link" href="#" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+			   {% endif %}
+
+				{% for i in paginator.page_range %}
+			  	{% if page_obj.number == i %}
+
+
+		    <li class="page-item">
+		    	<a class="page-link active bg-dark text-light" href="#">{{ i }}</a>
+			</li>
+			  {% else %}
+			<li class="page-item">
+			  <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+			</li>
+			   {% endif %}
+			  {% endfor %}
+			  {% if page_obj.has_next %}
+		    	<li class="page-item">
+			      <a class="page-link" href="?page={{page_obj.next_page_number}}" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+		    </li>
+		{% else %}
+			<li class="page-item disabled">
+				<a class="page-link">&raquo;</a>
+			</li>
+		{% endif %}
+		</ul>
+		{% endif %}
+		</nav>
+<!--bottom stoops here-->
+</section>
+
+{% endblock content %}

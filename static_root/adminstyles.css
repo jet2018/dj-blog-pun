@@ -1,0 +1,81 @@
+ #header {
+    background: #000;
+    color: #fff;
+}
+
+body {
+    color: #000 !important;
+    background: #000;
+}
+body.login {
+    background: #e16161 !important;
+}
+
+
+.login #content {
+    background: #e16161 !important;
+    border: none !important;
+}
+
+#footer {
+    padding: 0 !important;
+}
+.login .submit-row{
+    background: #e16161 !important;
+}
+
+caption {
+    background: #79aec8 !important;
+}
+#content-related {
+    background: #060606 !important;
+}
+td, th {
+    border-bottom: 1px solid #131111 !important;
+    }
+
+caption {
+    background: #20282d !important;
+    }
+
+#changelist .actions {
+    background: transparent !important;
+    color: #397d2b !important;
+   }
+#changelist .actions select {
+    background: #0d0c0c !important;
+    color:#33b318 !important;
+}
+.submit-row {
+    background: #000 !important;
+    border: none !important;
+}
+
+.module {
+    background: transparent;
+ }
+
+ .form-row {
+    border-bottom: none !important;
+}
+
+label {
+    color: #f2ebeb !important;
+}
+h1{
+color: #c5dcdd !important;
+}
+
+#user-tools {
+     font-weight: 800 !important;
+}
+#branding h1 {
+    font-size: 30px !important;
+}
+.dashboard #content {
+    width: 74% !important;
+}
+
+div.breadcrumbs {
+    background: #660b0b !important;
+    }

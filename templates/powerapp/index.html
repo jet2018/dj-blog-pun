@@ -1,0 +1,231 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<section class="pt-lg-1 mt-lg-5 pb-1 ">
+  <div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h3 class="mb-3 d-none text-warning d-md-inline-block">Top stories</h3>
+        </div>
+        <div class="col-6 text-left">
+            <a class="btn btn-warning mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+               <i class="ion-ios-arrow-back text-light"></i>
+            </a>
+            <a class="btn btn-warning mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
+                <i class="ion-ios-arrow-forward text-light"></i>
+            </a>
+        </div>
+        <div class="col-12">
+            <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+
+                <div class="carousel-inner">
+                  <h6 class="text-warning text-right">Top blog <span><a href="{% url 'powerapp:blog' %}" class="ml-3 btn btn-sm btn-warning text-light">View stories</a></span></h6>
+                    <div class="carousel-item active">
+<!--                        first row showing top torture scandles-->
+
+                        <div class="row">
+                        {% for post in top_three_posts %}
+                            <div class="col-md-4 mb-3">
+                                <div class="card bg-transparent">
+<!--                                    alt="100%x280"-->
+            <a href="{% url 'powerapp:single-blog' post.id %}">
+                {% if post.Image %}
+                <img class="card-img-top" width="100%" height="180" alt="{{post.title|truncatechars:20 }}" src="{{post.Image.url}}">
+                {% else  %}
+                <video src="{{ post.Video.url }}" class="card-img-top" width="100%" height="180"  controls></video>
+                {% endif %}
+                <div class="card-body text-dark bg-warning">
+                    <h4 class="card-title text-light">{{ post.title|truncatechars:25|safe}}</h4>
+                    <p class="card-text text-muted">{{ post.post_body|safe|truncatechars_html:35 }}
+                    </p>
+                </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+                    <div class="carousel-item">
+
+<!--                        second row blog-->
+                        <div class="row">
+
+                             {% for post in next_three_posts %}
+                            <div class="col-md-4 mb-3">
+                                <div class="card bg-transparent">
+<!--                                    alt="100%x280"-->
+            <a href="{% url 'powerapp:single-blog' post.id %}">
+                {% if post.Image %}
+                <img class="card-img-top" width="100%" height="180" alt="{{post.title|truncatechars:20 }}" src="{{post.Image.url}}">
+                {% else  %}
+                <video src="{{ post.Video.url }}" class="card-img-top" width="100%" height="180"  controls></video>
+                {% endif %}
+                <div class="card-body text-dark bg-warning">
+                    <h4 class="card-title text-light">{{ post.title|truncatechars:25|safe}}</h4>
+                    <p class="card-text text-muted">{{ post.post_body|safe|truncatechars_html:35 }}
+                    </p>
+                </div>
+                </a>
+            </div>
+        </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+
+<!--                        second row blog-->
+                        <div class="row">
+
+                             {% for post in last_three_posts %}
+                           <div class="col-md-4 mb-3">
+                                <div class="card bg-transparent">
+<!--                                    alt="100%x280"-->
+            <a href="{% url 'powerapp:single-blog' post.id %}">
+                {% if post.Image %}
+                <img class="card-img-top" width="100%" height="180" alt="{{post.title|truncatechars:20 }}" src="{{post.Image.url}}">
+                {% else  %}
+                <video src="{{ post.Video.url }}" class="card-img-top" width="100%" height="180"  controls></video>
+                {% endif %}
+                <div class="card-body text-dark bg-warning">
+                    <h4 class="card-title text-light">{{ post.title|truncatechars:25|safe}}</h4>
+                    <p class="card-text text-muted">{{ post.post_body|safe|truncatechars_html:35 }}
+                    </p>
+                </div>
+                </a>
+            </div>
+        </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+
+
+
+
+<!-- perpetrator slider -->
+
+
+<section class="pt-lg-1 mt-lg-1 pb-5 ">
+  <div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h3 class="mb-3 d-none text-warning d-md-inline-block">Camp gallery</h3>
+        </div>
+        <div class="col-6 text-left">
+            <a class="btn btn-warning mb-3 mr-1" href="#carouselExampleIndicators3" role="button" data-slide="prev">
+               <i class="ion-ios-arrow-back text-light"></i>
+            </a>
+            <a class="btn btn-warning mb-3 " href="#carouselExampleIndicators3" role="button" data-slide="next">
+                <i class="ion-ios-arrow-forward text-light"></i>
+            </a>
+        </div>
+        <div class="col-12">
+            <div id="carouselExampleIndicators3" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                  <h6 class="text-warning text-right">Top captions<span>
+                      <a href="{% url 'powerapp:gallery' %}" class="ml-3 btn btn-sm text-light btn-warning">View story</a></span></h6>
+                    <div class="carousel-item active">
+<!--                        first row showing top torture scandles-->
+                        <div class="row">
+                        {% for post in top_three_images %}
+                            <div class="col-md-4 mb-3" >
+                                <div class="bg-warning">
+                                    <img class="card-img-top" width="100%" height="180" alt="{{post.short_description|truncatechars:20 }}" src="{{post.Image.url}}">
+                                    <div class="card-body">
+                                        <p class="card-text text-dark">{{ post.short_description|truncatechars:100 }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+<!--                        second row posts-->
+                        <div class="row">
+                             {% for post in next_three_images %}
+                           <div class="col-md-4 mb-3" >
+                                <div class="bg-warning">
+                                    <img class="card-img-top" width="100%" height="180" alt="{{post.short_description|truncatechars:20 }}" src="{{post.Image.url}}">
+                                    <div class="card-body text-dark">
+                                        <p class="card-text text-dark">{{ post.short_description|truncatechars:100 }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                     <div class="carousel-item">
+<!--                        second row posts-->
+                        <div class="row">
+
+                             {% for post in last_three_images %}
+                           <div class="col-md-4 mb-3" >
+                                <div class="bg-warning">
+                                    <img class="card-img-top" width="100%" height="180" alt="{{post.short_description|truncatechars:20 }}" src="{{post.Image.url}}">
+                                    <div class="card-body text-dark">
+                                        <p class="card-text text-dark">{{ post.short_description|truncatechars:100 }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+
+<section class="ftco-about img ftco-section bg-dark ftco-no-pb" id="about-section">
+    	<div class="container">
+    		<div class="row d-flex">
+    			<div class="col-md-6 col-lg-5 d-flex">
+    				<div class="img-about img d-flex align-items-stretch">
+    					<div class="overlay"></div>
+	    				<div class="img d-flex align-self-stretch align-items-center" style="background-image:url(images/bg_1.png);">
+	    				</div>
+    				</div>
+    			</div>
+    			<div class="col-md-6 col-lg-7 pl-lg-5 pb-5">
+    				<div class="row justify-content-start pb-3">
+		          <div class="col-md-12 heading-section ftco-animate fadeInUp ftco-animated">
+		          	<h1 class="big">But Why</h1>
+		            <h2 class="mb-4 text-warning">Why NRM</h2>
+                      {% if why_nrm %}
+                        {% for why in why_nrm %}
+                            <p>
+                                {{ why.why_nrm|safe }}
+                            </p>
+                      {% endfor %}
+                      {% else %}
+                      <P>Reason soon coming</P>
+                      {% endif %}
+
+		          </div>
+		        </div>
+	          <div class="counter-wrap ftco-animate d-flex mt-md-3 fadeInUp ftco-animated">
+              <div class="text">
+                <p><a href="#" class="btn btn-primary py-3 px-3">Donate for this cause</a></p>
+              </div>
+	          </div>
+	        </div>
+        </div>
+    	</div>
+    </section>
+
+{% endblock content %}

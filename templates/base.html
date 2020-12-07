@@ -1,0 +1,478 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      {% for about in fullAbout %}
+      {% if about.AppName %}
+        <title>{{ about.AppName|capfirst}}</title>
+      {% else %}
+        <title>NRM</title>
+      {% endif %}
+      {% empty %}
+       <title>NRM</title>
+      {% endfor %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fontawesome.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+                                                                                                                                                                                 
+  </head>
+  <body data-spy="scroll" data-target=".site-navbar-target" class="bg-light" data-offset="300">
+
+    <nav class="navbar bg-warning navbar-expand-lg navbar-warning text-white ftco_navbar ftco-navbar-danger site-navbar-target" id="ftco-navbar">
+      <div class="container">
+        <a class="navbar-brand text-light font-weight-bold" href="{% url 'powerapp:index' %}">
+            <span class="ion-ios-thumbs-up"></span>
+<!--        <img src="{% static 'images/pp2.jpeg' %}" width="30" height="30" class="d-inline-block align-top img-rounded" alt="" loading="lazy">-->
+        {% for about in fullAbout %}
+          {% if about.AppName and about.Use_New_App_Name %}
+          {{about.AppName}}
+          {% else %}
+          NRM MY PARTY
+          {% endif %}
+        {% empty %}
+          NRM MY PARTY
+        {% endfor %}
+      </a>
+
+        <button class="text-light navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="oi oi-menu text-white"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="ftco-nav">
+          <ul class="navbar-nav nav ml-auto">
+            <li class="nav-item"><a href="{% url 'powerapp:candidates' %}" class="nav-link text-light font-weight-bold"><span>Candidates</span></a></li>
+             <li class="nav-item"><a href="{% url 'powerapp:about-nrm' %}" class="nav-link text-light font-weight-bold"><span>About the party</span></a></li>
+             <li class="nav-item text-light"><a href="{% url 'powerapp:achievements' %}" class="nav-link text-light font-weight-bold"><span>Achievements</span></a></li>
+            <li class="nav-item text-light"><a href="{% url 'powerapp:prospectives' %}" class="nav-link text-light font-weight-bold"><span>Prospectives</span></a></li>
+            <li class="nav-item text-light"><a href="{% url 'powerapp:gallery' %}" class="nav-link text-light font-weight-bold"><span>Gallery</span></a></li>
+            <li class="nav-item text-light"><a href="{% url 'powerapp:blog' %}" class="nav-link text-light font-weight-bold"><span>Blog</span></a></li>
+            <li class="nav-item text-light"><a href="{% url 'powerapp:about-us' %}" class="nav-link text-light font-weight-bold"><span>About Us</span></a></li>
+            <li class="nav-button" data-toggle="modal" data-target="#staticBackdrop">
+              <a class="nav-link btn btn-dark p-3">Donate</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+<!-- this is the whole app entrance -->
+ <section id="home-section" class="hero ">
+     <h5 class="text-dark text-sm text-primary font-weight-bold text-center bg-dark"><span class="ion-ios-thumbs-up"> SECURING YOUR FUTURE <span class="ion-ios-thumbs-up"></span></h5>
+
+    {% block content %}
+
+
+    {% endblock content%}
+<!--           <a role="button" class="floatBtn ">-->
+<!--            <i class="ion-ios-thumbs-up text-light my-floatBtn"></i>-->
+<!--           </a>-->
+</section>
+<footer class="ftco-footer ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">About&nbsp;Us</h2>
+              <p> {% for about in fullAbout %}
+                  {% if about.Summary_Of_About_Us_to_show_in_footer %}
+                  {{about.Summary_Of_About_Us_to_show_in_footer |capfirst}}
+                  {% else %}
+                  We need peace and here to say no to all forms of brutality
+                  {% endif %}
+                {% empty %}
+                  We need peace and here to say no to all forms of brutality
+                {% endfor %}
+              </p>
+              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+<!--links to any available social media-->
+                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4 ml-md-4">
+              <h2 class="ftco-heading-2">Useful&nbsp;Links</h2>
+              <ul class="list-unstyled">
+                <li><a href="{% url 'powerapp:index' %}"><span class="icon-long-arrow-right mr-2"></span>Home</a></li>
+                <li><a href="{% url 'powerapp:about-nrm' %}"><span class="icon-long-arrow-right mr-2"></span>About the party</a></li>
+                <li><a href="{% url 'powerapp:prospectives' %}"><span class="icon-long-arrow-right mr-2"></span>Prospectives</a></li>
+                <li>
+                  <a href="{% url 'powerapp:achievements' %}"><span class="icon-long-arrow-right mr-2"></span>Achievements</a></li>
+
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+             <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Reach-out</h2>
+              <ul class="list-unstyled">
+                <li><a href="{% url 'powerapp:about-us' %}#contact-us-form"><span class="icon-long-arrow-right mr-2"></span>Contact us</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#staticBackdrop"><span class="icon-long-arrow-right mr-2"></span>Support us</a></li>
+                <li><a href="{% url 'powerapp:blog' %}"><span class="icon-long-arrow-right mr-2"></span>Blog</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2">Have a Questions?</h2>
+            	<div class="block-23 mb-3">
+	              <ul>
+                    {% for about in fullAbout %}
+                  {% if about.Where_we_are and about.Use_New_Where_We_Are %}
+                 <li>
+                   <span class="icon icon-map-marker">
+                   </span><span class="text">{{ about.Where_we_are|capfirst}}</span>
+                 </li>
+                  {% endif %}
+
+                      {% if about.our_official_phone %}
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">{{ about.our_official_phone }}</span></a></li>
+	                {% endif %}
+
+                      {% if about.our_official_email %}
+                      <li><a href="#"><span class="icon icon-envelope"></span><span class="text">{{about.our_official_email}}</span></a></li>
+	                    {% endif %}
+                      {% endfor %}
+                  </ul>
+	            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+            <p>
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
+  </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'js/scrollax.min.js' %}"></script>
+
+  <script src="{% static 'js/main.js' %}"></script>
+
+  </body>
+</html>
+
+
+<!-- Modal -->
+<div class="modal bg-warning fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title text-dark" id="staticBackdropLabel">Donate towards this cause</h5>
+       <!--  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+       Running this platform and this mobilisation initiative is an expensive task, very many people have already given up their due funds to keep this voice awake and alarming, We therefore request you to add to those who have already stood up for their party through contribbuting to us in all the ways possible. We receive funds through variuos ways, click the <span class="text-success">Contribute</span> button below to run for the cause. Thank you in advance. 
+      </div>
+      <div class="modal-footer">
+        <a type="button" class="text-primary" data-dismiss="modal">I do not feel like so </a>
+        <a href="#!" type="button" class="btn btn-outline-success">Contribute</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--login/signup modal-->
+<!-- Modal -->
+<div class="modal fade bg-warning" id="staticBackdrop2" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content log-in">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="staticBackdropLabel">Login below</h5>
+          <a type="button" class="text-primary btn" onClick="CreateToggle()">Create</a>
+      </div>
+      <div class="modal-body">
+          <span class="error2"></span>
+          <form action="{% url 'powerapp:login' %}" id="loginForm" method="post" class="form-group">
+              {% csrf_token %}
+              <div class="form-group">
+                <input type="text" name="username" class="form-control" placeholder="Enter your username or email">
+              </div>
+
+              <div class="form-group">
+                <input type="password" name="password" value="Password" placeholder="Enter your password" class="form-control">
+              </div>
+
+              <div class="form-group">
+                  <button type="submit" class="btn p-2 btn-block btn-success text-success">Login now</button>
+              </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+         <a type="button" class="btn btn-default" data-dismiss="modal">Not now</a>
+      </div>
+    </div>
+
+<!--      create account-->
+     <div class="modal-content sign-up d-none">
+       <div class="modal-header">
+        <h5 class="modal-title text-dark" id="staticBackdropLabel">Create account below</h5>
+          <a type="button" class="text-primary btn" onClick="LoginToggle()">Login</a>
+      </div>
+      <div class="modal-body">
+          <span class="error"></span>
+          <form action="{% url 'powerapp:signup' %}" id="formCreateAccount" method="post" class="form-group">
+              {% csrf_token %}
+
+                <input type="text" required minlength="2" name="fname" class="form-control mb-1 bg-dark border" placeholder="First name">
+                <input type="text" required minlength="2" name="lname"  class="form-control mb-1 bg-dark border" placeholder="Last name">
+                <input type="text" required minlength="3" name="username" placeholder="Create a username" class="form-control mb-1 bg-dark border">
+                <input type="email" required minlength="6" name="email" placeholder="Email address" class="form-control mb-1 bg-dark border">
+                <input type="password" minlength="6" required name="password1" placeholder="Create password" class="form-control mb-1 bg-dark border">
+                <input type="password" minlength="6" required name="password2" placeholder="Confirm password" class="form-control mb-1 bg-dark border">
+
+              <div class="form-group">
+                  <input type="submit" value="Create account now" class="btn btn-block btn-success ">
+              </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+         <a type="button" class="text-primary btn" data-dismiss="modal">Not now</a>
+        <a type="button" onClick="LoginToggle()" class="text-primary btn btn-default">Login</a>
+      </div>
+  </div>
+</div>
+</div>
+
+
+
+
+<!--submit an image-->
+ <div class="modal fade bg-warning" id="staticBackdropgallery" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+       <div class="modal-header">
+        <h5 class="modal-title text-dark" id="staticBackdropLabel">Submit an image</h5>
+      </div>
+      <div class="modal-body">
+          <span class="error"></span>
+          <form action="{% url 'powerapp:addImage' %}" enctype="multipart/form-data"  id="add" method="post" class="form-group">
+              {% csrf_token %}
+              <input type="file" accept="image/*" required name="image" placeholder="Upload Image" class="form-control mb-1">
+              <textarea type="text" rows="3" cols="10" required maxlength="100" name="short_description" placeholder="Add a short description" class="form-control mb-1"></textarea>
+              <div class="form-group">
+                  <input type="submit" value="Submit image" class="btn btn-block btn-success ">
+              </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+         <a type="button" class="text-primary btn" data-dismiss="modal">Not now</a>
+      </div>
+  </div>
+</div>
+</div>
+
+
+<!--submit a candidate-->
+ <div class="modal fade bg-warning" id="staticBackdropcandidate" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+       <div class="modal-header">
+        <h5 class="modal-title text-dark" id="staticBackdropLabel">Register a/your candidate</h5>
+      </div>
+   <p class="text-muted alert">You can register yourself as a candidate or register your candidate. Sibmitted data is prone for reviews</p>
+
+      <div class="modal-body">
+          <span class="error"></span>
+          <form action="{% url 'powerapp:addImage' %}" enctype="multipart/form-data"  id="add" method="post" class="form-group">
+              {% csrf_token %}
+              <input type="text" required name="full_name" placeholder="Full name" class="form-control mb-1">
+              <input type="text" required name="post" placeholder="Position contested for" class="form-control mb-1">
+              <input type="text" required name="area" placeholder="Area/Constituency" class="form-control mb-1">
+              <input type="tel" required maxlength="13" name="phone" placeholder="Official Phone Number" class="form-control mb-1">
+              <input type="email" name="email" placeholder="Official Email" class="form-control mb-1">
+              <textarea  style="resize:none" rows="3" cols="10" required maxlength="100" name="short_bio" placeholder="Add a short bio" class="form-control mb-1"></textarea>
+              <textarea  style="resize:none" rows="5" cols="10" required maxlength="1000" name="profile" placeholder="Add any profile of the candidate" class="form-control mb-1"></textarea>
+              <div class="form-group">
+                  <label for="image">
+                      Profile Image
+                  </label>
+              <input type="file" name="image" accept="image/*" placeholder="Official candidate" class="mb-1">
+              </div>
+              <div class="form-group">
+                  <input type="submit" value="Submit Candidate" class="btn btn-block btn-success ">
+              </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+         <a type="button" class="text-primary btn" data-dismiss="modal">Not now</a>
+      </div>
+  </div>
+</div>
+</div>
+
+{% block scripts %}
+
+{% endblock scripts %}
+<script>
+
+
+    function CreateToggle(){
+        $('.sign-up').fadeIn('slow').removeClass('d-none');
+        $('.log-in').fadeOut('slow').addClass('d-none');
+    }
+
+    function LoginToggle(){
+         $('.log-in').fadeIn('slow').removeClass('d-none');
+        $('.sign-up').fadeOut('slow').addClass('d-none');
+    }
+
+    $('#formCreateAccount').on('submit', function(e){
+        e.preventDefault();
+       data = $(this).serialize()
+       url = $(this).attr('action')
+
+        $.ajax({
+            url:url,
+            data:data,
+            type:'post',
+            success:function(rs){
+                if(rs.class == 'success'){
+                    $('.log-in').fadeIn('slow').removeClass('d-none');
+                    $('.sign-up').fadeOut('slow').addClass('d-none');
+                }else{
+                    $('.error').html(rs.result).addClass(rs.class);
+                    $('.error2').html(rs.result).addClass(rs.class);
+                }
+            }
+        })
+    })
+
+
+    $('#loginForm').on('submit', function(e){
+        e.preventDefault();
+       data = $(this).serialize()
+       url = $(this).attr('action')
+
+        $.ajax({
+            url:url,
+            data:data,
+            type:'post',
+            success:function(rs){
+                if(rs.class == 'success'){
+                   window.location.href = location.href;
+                }else{
+                    $('.error2').html(rs.result).addClass(rs.class);
+                }
+            }
+        })
+    })
+
+
+
+    $('.contact-form').on('submit', function(e){
+        e.preventDefault();
+       data = $(this).serialize()
+       url = $(this).attr('action')
+
+        $.ajax({
+            url:url,
+            data:data,
+            type:'post',
+            success:function(rs){
+                if(rs.result){
+                   alert("Your email has been sent successfully")
+                   $(this).trigger('reset')
+                }else{
+                    alert("There was an error sending this email")
+                }
+            }
+        })
+    })
+
+
+     function likepost(id) {
+        url1 = $('#btnLikeImage'+id).data('url')
+        $.ajax({
+            url: url1,
+            data: {
+                'id': id,
+            },
+            type: 'get',
+            success: function (response) {
+                 if (response.result == 'ok') {
+                    counter = ''
+                    liker = ''
+                    if (response.countNow == 1) {
+                        counter = ' Like';
+                    } else {
+                        counter = " Likes"
+                    }
+                    $('#likesSpan'+id).text(response.countNow + ' ' + counter);
+                }
+            }
+
+        });
+    }
+
+
+
+    $('#addImage').on('submit', function(e){
+        e.preventDefault();
+       data = $(this).serialize()
+       url = $(this).attr('action')
+
+        $.ajax({
+            url:url,
+            data:data,
+            type:'post',
+            success:function(rs){
+                if(rs.class == 'success'){
+                    $('.log-in').fadeIn('slow').removeClass('d-none');
+                    $('.sign-up').fadeOut('slow').addClass('d-none');
+                }else{
+                    $('.error').html(rs.result).addClass(rs.class);
+                    $('.error2').html(rs.result).addClass(rs.class);
+                }
+            }
+        })
+    })
+
+</script>

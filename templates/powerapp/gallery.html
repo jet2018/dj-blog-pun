@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+    <section class="mt-lg-1 pt-lg-1">
+		{% if user.is_authenticated %}
+	<button class="btn btn-primary text-light ml-lg-2 mb-lg-1" data-toggle="modal" data-target="#staticBackdropgallery">Contribute to this gallery</button>
+	{% else %}
+		<button class="btn btn-dark text-light ml-lg-2 mb-lg-1" data-toggle="modal" data-target="#staticBackdrop2">Contribute to this gallery</button>
+	{% endif %}
+		{% for message in messages %}
+		<div class="alert ">{{ message }}</div>
+		{% endfor %}
+		<!-- top pagination -->
+		<nav aria-label="Page navigation pagination-sm  example">
+			 {% if is_paginated %}
+		  <ul class="pagination justify-content-center mr-1">
+			  {% if page_obj.has_previous %}
+		    <li class="page-item">
+		      <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+			  {% else %}
+			<li class="page-item disabled">
+		      <a class="page-link" href="#" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+			   {% endif %}
+
+				{% for i in paginator.page_range %}
+			  	{% if page_obj.number == i %}
+		    <li class="page-item">
+		    	<a class="page-link active bg-warning text-light" href="#">{{ i }}</a>
+			</li>
+			  {% else %}
+			<li class="page-item">
+			  <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+			</li>
+			   {% endif %}
+			  {% endfor %}
+			  {% if page_obj.has_next %}
+		    	<li class="page-item">
+			      <a class="page-link" href="?page={{page_obj.next_page_number}}" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+		    </li>
+		{% else %}
+			<li class="page-item disabled">
+				<a class="page-link">&raquo;</a>
+			</li>
+		{% endif %}
+		</ul>
+		{% endif %}
+		</nav>
+<!--pagination stoops here-->
+
+	<div class="row mx-lg-1">
+		{% for image in gallery %}
+  	    <div class="col-lg-3 col-xl-3 col-md-4 col-sm-6 col-xs-12">
+            <img src="{{ image.Image.url }}" class="card-img-top" width="100%" height="180" alt="{{ image.short_description|truncatechars:20 }}"/>
+            <div class="card-body bg-warning">
+          <span class="text-light text-sm">{{ image.short_description|capfirst }}</span>
+          <div class="card-text">
+			  <small class="text-muted">Uploaded {{ image.upload_date|naturaltime }}</small>
+          </div>
+        </div>
+       </div>
+        {% empty %}
+		<div class="alert col-md-12 alert-warning text-primary text-center">The gallery is currently empty</div>
+		{% endfor %}
+        </div>
+<!-- bottom pagination -->
+		<nav aria-label="Page navigation pagination-sm  example">
+			 {% if is_paginated %}
+		  <ul class="pagination justify-content-center mr-1">
+			  {% if page_obj.has_previous %}
+		    <li class="page-item">
+		      <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+			  {% else %}
+			<li class="page-item disabled">
+		      <a class="page-link" href="#" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+			   {% endif %}
+
+				{% for i in paginator.page_range %}
+			  	{% if page_obj.number == i %}
+		    <li class="page-item">
+		    	<a class="page-link active bg-warning text-light" href="#">{{ i }}</a>
+			</li>
+			  {% else %}
+			<li class="page-item">
+			  <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+			</li>
+			   {% endif %}
+			  {% endfor %}
+			  {% if page_obj.has_next %}
+		    	<li class="page-item">
+			      <a class="page-link" href="?page={{page_obj.next_page_number}}" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+		    </li>
+		{% else %}
+			<li class="page-item disabled">
+				<a class="page-link">&raquo;</a>
+			</li>
+		{% endif %}
+		</ul>
+		{% endif %}
+		</nav>
+		</nav>
+<!--bottom stoops here-->
+</section>
+
+{% endblock content %}

@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+ <section class="mt-lg-1 pt-lg-1">
+     {% if user.is_authenticated %}
+	<button class="btn btn-primary text-light ml-lg-2 mb-lg-1" data-toggle="modal" data-target="#staticBackdropcandidate">Register your candidate</button>
+	{% else %}
+		<button class="btn btn-dark text-light ml-lg-2 mb-lg-1" data-toggle="modal" data-target="#staticBackdrop2">Register your candidate</button>
+	{% endif %}
+		{% for message in messages %}
+		<div class="alert ">{{ message }}</div>
+		{% endfor %}
+		<!-- top pagination -->
+		<nav aria-label="Page navigation pagination-sm  example">
+			 {% if is_paginated %}
+		  <ul class="pagination justify-content-center mr-1">
+			  {% if page_obj.has_previous %}
+		    <li class="page-item">
+		      <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+			  {% else %}
+			<li class="page-item disabled">
+		      <a class="page-link" href="#" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+			   {% endif %}
+
+				{% for i in paginator.page_range %}
+			  	{% if page_obj.number == i %}
+		    <li class="page-item">
+		    	<a class="page-link active bg-warning text-light" href="#">{{ i }}</a>
+			</li>
+			  {% else %}
+			<li class="page-item">
+			  <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+			</li>
+			   {% endif %}
+			  {% endfor %}
+			  {% if page_obj.has_next %}
+		    	<li class="page-item">
+			      <a class="page-link" href="?page={{page_obj.next_page_number}}" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+		    </li>
+		{% else %}
+			<li class="page-item disabled">
+				<a class="page-link">&raquo;</a>
+			</li>
+		{% endif %}
+		</ul>
+		{% endif %}
+		</nav>
+
+	<div class="row ml-lg-1">
+		{% for candidate in candidates %}
+        <a href="{% url 'powerapp:candidate-details' candidate.id %}">
+  	<div class="bg-transparent col-lg-3 col-xl-4 col-md-4 col-sm-6 col-xs-12">
+		{% if candidate.image %}
+    	<img src="{{ candidate.image.url }}" width="100%" height="180" class="card-img-top" alt="{{ candidate.full_name|truncatechars:20 }}"/>
+		{% else %}
+		<img src="..." alt="No image provided" width="100%" height="180" class="card-img-top">
+		{% endif %}
+		<div class="card-body bg-warning">
+      <h6 class="card-title text-dark font-weight-bold">Hon: {{candidate.full_name|capfirst|truncatechars:42}}</h6>
+      <span class="card-text text-dark">For: {{ candidate.post|capfirst|truncatechars:30 }}-{{ candidate.area|truncatechars:20 }}</span>
+      <div class="card-text"><small class="text-dark">Uploaded {{ candidate.upload_date|naturaltime }}</small>
+      </div>
+    </div>
+  </div>
+        </a>
+		{% empty %}
+		<div class="alert col-md-12 alert-warning text-primary text-center">No candidates as of yet</div>
+		{% endfor %}
+</div>
+<nav aria-label="Page navigation pagination-sm  example">
+			 {% if is_paginated %}
+		  <ul class="pagination justify-content-center mr-1">
+			  {% if page_obj.has_previous %}
+		    <li class="page-item">
+		      <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+			  {% else %}
+			<li class="page-item disabled">
+		      <a class="page-link" href="#" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+			   {% endif %}
+
+				{% for i in paginator.page_range %}
+			  	{% if page_obj.number == i %}
+		    <li class="page-item">
+		    	<a class="page-link active bg-warning text-light" href="#">{{ i }}</a>
+			</li>
+			  {% else %}
+			<li class="page-item">
+			  <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+			</li>
+			   {% endif %}
+			  {% endfor %}
+			  {% if page_obj.has_next %}
+		    	<li class="page-item">
+			      <a class="page-link" href="?page={{page_obj.next_page_number}}" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+		    </li>
+		{% else %}
+			<li class="page-item disabled">
+				<a class="page-link">&raquo;</a>
+			</li>
+		{% endif %}
+		</ul>
+		{% endif %}
+		</nav>
+</section>
+
+{% endblock content %}

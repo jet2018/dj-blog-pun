@@ -1,0 +1,13 @@
+{% extends 'admin/base.html' %}
+
+{% load static%}
+
+{% block branding %}
+<h1 id="head">
+    Site Admin Panel
+</h1>
+{% endblock branding %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'adminstyles.css' %}">
+{% endblock extrastyle %}
