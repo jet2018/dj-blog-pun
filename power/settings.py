@@ -25,7 +25,7 @@ SECRET_KEY = 'zic6j-5%fm=^s$)82x1)s%lea9bdy$#6dif7k8+kl_aqjb@qrq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['nrm.pythonanywhere.com', 'www.nrm.pythonanywhere.com']
 
 
 # Application definition
@@ -79,10 +79,10 @@ WSGI_APPLICATION = 'power.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'DATABASE_NAME',
-        'USER': 'root',
-        'PASSWORD': 'PASSWORD_TO_YOUR_DATABASE',
-        'HOST': 'localhost',
+        'NAME': 'nrm$power',
+        'USER': 'nrm',
+        'PASSWORD': 'peacebewithyouall2020',
+        'HOST': 'nrm.mysql.pythonanywhere-services.com',
         'PORT': '3306'
     }
 }

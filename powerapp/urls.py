@@ -19,6 +19,8 @@ from .views import (
     Sensitisation,
     DetailedBlog,
     addImage,
+    # manifesto,
+    addCandidate,
     )
 
 app_name='powerapp'
@@ -42,6 +44,7 @@ urlpatterns = [
     path("logout", logout, name="logout"),
     # postlikes
     path("like", likeapost, name="likeImage"),
+    # path("manifesto", manifesto, name="manifesto"),
     # about
     path("about-us", aboutUsView.as_view(), name="about-us"),
     path("about-the-party", aboutParty.as_view(), name="about-nrm"),
@@ -51,6 +54,7 @@ urlpatterns = [
     # send an email
     path('send-email', sendEmail, name="sendEmail"),
     path('add-image', addImage, name="addImage"),
+    path('add-candidate', addCandidate, name="add-candidate"),
     path("sensitisation", Sensitisation.as_view(), name="sensitisation"),
 
 ]

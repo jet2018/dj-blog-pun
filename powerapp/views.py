@@ -17,7 +17,7 @@ class HomePage(TemplateView):
         context["top_three_posts"] = Blog.objects.filter(is_published=True).order_by('-upload_date')[:3]
         context["next_three_posts"] = Blog.objects.filter(is_published=True).order_by('-upload_date')[3:6]
         context["last_three_posts"] = Blog.objects.filter(is_published=True).order_by('-upload_date')[6:9]
-        
+
         context["top_three_images"] = Gallery.objects.filter(is_published=True).order_by('-upload_date')[:3]
         context["next_three_images"] = Gallery.objects.filter(is_published=True).order_by('-upload_date')[3:6]
         context["last_three_images"] = Gallery.objects.filter(is_published=True).order_by('-upload_date')[7:9]
@@ -27,6 +27,9 @@ class HomePage(TemplateView):
 
 class Sensitisation(TemplateView):
     template_name = 'powerapp/sensitisation.html'
+
+# def manifesto(request):
+    # return redirect(request, "https://nrm.ug/NRM_Manifesto_2021-2026.pdf")
 
 class GalleryView(ListView):
     paginate_by = 12
@@ -73,7 +76,7 @@ class aboutParty(TemplateView):
 
 
 # achievements of the party
-# done 
+# done
 class AchievementsView(ListView):
     paginate_by = 9
     model = Achievement
@@ -140,8 +143,8 @@ class DetailedProspective(DetailView):
 class BlogView(ListView):
     template_name='powerapp/blog.html'
     model = Blog
-    paginate_by = 9
-    context_object_name = 'blog'
+    paginate_by = 12
+    context_object_name = 'blogs'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -157,12 +160,9 @@ class DetailedBlog(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["fullAbout"] = About.objects.all()[:1]
+        context["allBlogs"] = Blog.objects.all().order_by('-upload_date')[:3]
         return context
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["fullAbout"] = About.objects.all()[:1]
-        return context
 
 class CandidatesView(ListView):
     template_name='powerapp/candidates.html'
@@ -170,45 +170,62 @@ class CandidatesView(ListView):
     paginate_by = 9
     context_object_name = 'candidates'
 
+    def get_queryset( self ):
+        candidates = super().get_queryset()
+        candidates = Candidate.objects.filter(is_published=True)
+        return candidates
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["fullAbout"] = About.objects.all()[:1]
-        context["candidates"] = Candidate.objects.filter(is_published=True)
         return context
 
 # done
 class DetailedCandidate(DetailView):
-    template_name='powerapp/single-blog.html'
-    model = Blog
-    context_object_name = 'blog'
+    template_name='powerapp/single-candidate.html'
+    model = Candidate
+    context_object_name = 'candidate'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["fullAbout"] = About.objects.all()[:1]
         return context
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["fullAbout"] = About.objects.all()[:1]
-        return context
-# i stoped here, to resume from here tomorrow
+
 def addCandidate(request):
     addedBy = User.objects.get(pk = request.user.id)
     if request.method == 'POST' and request.FILES:
-        pik = request.FILES['image']
         full_name = request.POST['full_name']
-        full_name = request.POST['full_name']
-        full_name = request.POST['full_name']
-        full_name = request.POST['full_name']
-        full_name = request.POST['full_name']
+        post = request.POST['post']
+        area = request.POST['area']
+        phone = request.POST['phone']
+        email = request.POST['email']
+        short_bio = request.POST['short_bio']
+        profile = request.POST['profile']
+        image = request.FILES['image']
 
-        if gallary:
-            messages.success(request, 'Your image has been submitted for further reviews. Thank you for your contribution.')
-            redirect('powerapp:gallery')
+
+        if not image or not post or not area or not image:
+            messages.error(request, 'The full name, post contested for, area or constituency and the Image of the candidate can not be null!!')
+            redirect('powerapp:candidates')
         else:
-            messages.error(request, 'There was an error submitting your image, please try again')
-            redirect('powerapp:gallery')
-    return redirect('powerapp:gallery')
+            saveCandidate = Candidate.objects.create(full_name = full_name,
+             post=post,
+             area=area,
+             phone=phone,
+             email = email,
+             short_bio = short_bio,
+             profile = profile,
+             image = image,
+             added_by = addedBy
+             )
+            if saveCandidate:
+                messages.success(request, "Your candidate was submitted successfully")
+                redirect('powerapp:candidates')
+            else:
+                messages.error(request, 'There was an error submitting your candidate, please try again')
+                redirect('powerapp:candidates')
+    return redirect('powerapp:candidates')
 
 
 def createAccount(request):

@@ -27,15 +27,20 @@
     <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
 
     <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <link rel="icon" href="https://pbs.twimg.com/profile_images/1323176968033099776/eSyu3e8o_400x400.jpg">
 
     <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
 
     <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-                                                                                                                                                                                 
+
   </head>
+
   <body data-spy="scroll" data-target=".site-navbar-target" class="bg-light" data-offset="300">
+    <div id="fb-root"></div>
+<script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6"></script>
+
 
     <nav class="navbar bg-warning navbar-expand-lg navbar-warning text-white ftco_navbar ftco-navbar-danger site-navbar-target" id="ftco-navbar">
       <div class="container">
@@ -60,9 +65,9 @@
         <div class="collapse navbar-collapse" id="ftco-nav">
           <ul class="navbar-nav nav ml-auto">
             <li class="nav-item"><a href="{% url 'powerapp:candidates' %}" class="nav-link text-light font-weight-bold"><span>Candidates</span></a></li>
-             <li class="nav-item"><a href="{% url 'powerapp:about-nrm' %}" class="nav-link text-light font-weight-bold"><span>About the party</span></a></li>
-             <li class="nav-item text-light"><a href="{% url 'powerapp:achievements' %}" class="nav-link text-light font-weight-bold"><span>Achievements</span></a></li>
-            <li class="nav-item text-light"><a href="{% url 'powerapp:prospectives' %}" class="nav-link text-light font-weight-bold"><span>Prospectives</span></a></li>
+            <li class="nav-item"><a href="https://nrm.ug/about" target="_blank" class="nav-link text-light font-weight-bold"><span>About the party</span></a></li>
+             <li class="nav-item text-light"><a href="https://nrm.ug/achievements" target="_blank" class="nav-link text-light font-weight-bold"><span>Achievements</span></a></li>
+            <li class="nav-item text-light"><a href="https://nrm.ug/NRM_Manifesto_2021-2026.pdf" target="_blank" class="nav-link text-light font-weight-bold"><span>Prospectives</span></a></li>
             <li class="nav-item text-light"><a href="{% url 'powerapp:gallery' %}" class="nav-link text-light font-weight-bold"><span>Gallery</span></a></li>
             <li class="nav-item text-light"><a href="{% url 'powerapp:blog' %}" class="nav-link text-light font-weight-bold"><span>Blog</span></a></li>
             <li class="nav-item text-light"><a href="{% url 'powerapp:about-us' %}" class="nav-link text-light font-weight-bold"><span>About Us</span></a></li>
@@ -97,17 +102,17 @@
                   {% if about.Summary_Of_About_Us_to_show_in_footer %}
                   {{about.Summary_Of_About_Us_to_show_in_footer |capfirst}}
                   {% else %}
-                  We need peace and here to say no to all forms of brutality
+                  We are here to defend the fraternity of NRM
                   {% endif %}
                 {% empty %}
-                  We need peace and here to say no to all forms of brutality
+                 We are here to defend the fraternity of NRM
                 {% endfor %}
               </p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
 <!--links to any available social media-->
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                <li class="ftco-animate"><a href="https://twitter.com/@jet_ezra" target"_blank"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="https://facebook.com/juniorezratumusiime" target"_blank"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="https://www.instagram.com/jet_ezra/" target"_blank"><span class="icon-instagram"></span></a></li>
               </ul>
             </div>
           </div>
@@ -117,10 +122,10 @@
               <h2 class="ftco-heading-2">Useful&nbsp;Links</h2>
               <ul class="list-unstyled">
                 <li><a href="{% url 'powerapp:index' %}"><span class="icon-long-arrow-right mr-2"></span>Home</a></li>
-                <li><a href="{% url 'powerapp:about-nrm' %}"><span class="icon-long-arrow-right mr-2"></span>About the party</a></li>
-                <li><a href="{% url 'powerapp:prospectives' %}"><span class="icon-long-arrow-right mr-2"></span>Prospectives</a></li>
+                <li><a href="https://nrm.ug/about" target="_blank"><span class="icon-long-arrow-right mr-2"></span>About the party</a></li>
+                <li><a href="https://www.nrm.ug/NRM_Manifesto_2021-2026.pdf" target="_blank"><span class="icon-long-arrow-right mr-2"></span>Prospectives</a></li>
                 <li>
-                  <a href="{% url 'powerapp:achievements' %}"><span class="icon-long-arrow-right mr-2"></span>Achievements</a></li>
+                  <a href="https://www.nrm.ug/achievements" target="_blank"><span class="icon-long-arrow-right mr-2"></span>Achievements</a></li>
 
               </ul>
             </div>
@@ -137,7 +142,7 @@
           </div>
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-            	<h2 class="ftco-heading-2">Have a Questions?</h2>
+            	<h2 class="ftco-heading-2">Have any Questions?</h2>
             	<div class="block-23 mb-3">
 	              <ul>
                     {% for about in fullAbout %}
@@ -208,11 +213,11 @@
         </button> -->
       </div>
       <div class="modal-body">
-       Running this platform and this mobilisation initiative is an expensive task, very many people have already given up their due funds to keep this voice awake and alarming, We therefore request you to add to those who have already stood up for their party through contribbuting to us in all the ways possible. We receive funds through variuos ways, click the <span class="text-success">Contribute</span> button below to run for the cause. Thank you in advance. 
+       Running this platform and this mobilisation initiative is an expensive task, very many people have already given up their due funds to keep this voice awake and alarming, We therefore request you to add to those who have already stood up for their party through contribbuting to us in all the ways possible. We receive funds through variuos ways, click the <span class="text-success">Contribute</span> button below to run for the cause. Thank you in advance.
       </div>
       <div class="modal-footer">
         <a type="button" class="text-primary" data-dismiss="modal">I do not feel like so </a>
-        <a href="#!" type="button" class="btn btn-outline-success">Contribute</a>
+        <a href="https://dashboard.flutterwave.com/donate/srng4mbymfid" type="button" class="btn btn-outline-success">Contribute</a>
       </div>
     </div>
   </div>

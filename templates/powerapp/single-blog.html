@@ -1,0 +1,100 @@
+{% extends 'base.html' %} {% load static %} {% load humanize %} {% block content %}
+<style>
+    .hero-wrap {
+        background-size: contain;
+        background-position: center;
+    }
+</style>
+<section class="hero-wrap " {% if blog.Image %} style="background-image: url('{{ blog.Image.url }}'); background-size: cover;  " {% else %} style="background-image: url('{% static 'images/bg_1.jpg' %}');" {% endif %} data-stellar-background-ratio="0.5">
+    <!--      <div class="overlay"></div>-->
+    <div class="container text-dark">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+            <div class="col-md-12 ftco-animate pb-5 mb-3 text-center">
+
+                <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'powerapp:index' %}">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Details <i class="ion-ios-arrow-forward"></i></span></p>
+                <p>bloged {{ blog.upload_date|naturaltime }}</p>
+            </div>
+
+            <div class="tag-widget  blog-tag-container mb-5 mt-5">
+                <div class="tagcloud ">
+
+                    <a href="#" class="tag-cloud-link bg-dark">bloged by {{ blog.added_by.get_username|capfirst }}</a>
+
+                </div>
+                <div class="mb-3 text-lg text-info">{{blog.title|capfirst}}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 text-dark ftco-animate">
+                <h2 class="mb-3 text-dark">{{blog.title|capfirst|safe}}</h2>
+                {% if blog.Image %}
+                <img src="{{blog.Image.url}}" alt="{{ blog.title|truncatechars:15 }}" class="img-fluid"> {% elif blog.Video %}
+                <video src="{{ blog.Video.url }}" alt="{{ blog.title|truncatechars:15 }}" class="img-fluid"> {% endif %}
+
+<div class="fb-like mt-3" data-href="https://nrm.pythonanywhere.com/blog/{{ blog.id }}/details" data-width="" data-layout="standard" data-action="like" data-size="large" data-share="true"></div>
+              {{blog.post_body|safe }}
+<div class="fb-comments" data-href="https://nrm.pythonanywhere.com/blog/{{blog.id}}/details" data-numposts="5" data-width=""></div>
+            <!-- .col-md-8 -->
+            </div>
+
+            <div class="col-lg-4 sidebar ftco-animate">
+                <div class="sidebar-box ftco-animate text-dark">
+                    <h3 class="heading-sidebar text-dark">Top stories</h3>
+                    {% for perpetrator in allBlogs|slice:'3' %}
+                    <div class="block-21 mb-4 d-flex">
+                        {% if perpetrator.Image %}
+                        <a href="{% url 'powerapp:single-blog' perpetrator.id %}" class="blog-img mr-4" style="background-image: url('{{ perpetrator.Image.url}}');"></a>
+                        {% elif perpetrator.Video %}
+                        <a href="{% url 'powerapp:single-blog' perpetrator.id %}" class="blog-img mr-4" style="background-image: url('{{ perpetrator.Video.url}}');"></a>
+                        {% else %}
+                        <a href="{% url 'powerapp:single-blog' perpetrator.id %}" class="blog-img mr-4" style="background-image: url({% static 'images/image_1.jpg' %});">
+                        </a>
+                        {% endif %}
+
+
+
+                            <div class="text">
+                            <h3 class="heading">
+                            <a href="{% url 'powerapp:single-blog' perpetrator.id %}" class="text-dark">
+                            {{perpetrator.title|truncatechars:50|safe}}
+                            </a>
+                            </h3>
+                             <div class="meta">
+                                <div>
+                                    <a href="{% url 'powerapp:single-blog' perpetrator.id %}" class="text-dark"><span class="icon-calendar text-dark"></span> bloged {{ perpetrator.upload_date|naturaltime }}</a></div>
+                                <div>
+                                    <a href="{% url 'powerapp:single-blog' perpetrator.id %}" class="text-dark"><span class="icon-person"></span> {{perpetrator.added_by.get_username|capfirst}}</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <li class="text-dark">No posts here yet</li>
+                    {% endfor %}
+                </div>
+
+
+
+
+
+
+
+                <!--            <div class="sidebar-box ftco-animate">-->
+                <!--              <h3 class="heading-sidebar">Paragraph</h3>-->
+                <!--              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>-->
+                <!--            </div>-->
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- .section -->
+
+
+
+{% endblock content %}
